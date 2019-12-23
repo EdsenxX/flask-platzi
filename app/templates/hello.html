@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% import "macros.html" as macros %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+  {{ super() }}
+  Bienvenido
+{% endblock %}
+
+{% block content %}
+  {% if not user_ip %}
+    <a href="{{ url_for("index") }}">Ir a inicio</a>
+  {% else %}
+    {% if username %}
+      <h1>Bienvenido {{ username | capitalize }}</h1>
+    {% endif %}
+
+    <h3>Hello World from Flask</h3>
+    <p>Your IP is: {{ user_ip }}</p>
+
+    <ul>
+      {% for todo in todos %}
+        {{ macros.render_todo(todo) }}
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endblock %}
